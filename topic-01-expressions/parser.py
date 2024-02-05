@@ -12,7 +12,6 @@ expression = term { ("+" | "-") term }
 term = factor { ("*" | "/") factor }
 factor = number | "(" expression ")"
 number = $number
-'''
 
 1 + 2 * 3
 
@@ -21,21 +20,22 @@ expr
     factor     factor * factor 
     number     number   number
     1          2        3
+'''
 
 class Node:
-    def __init__(self, type, value=Node, left=None, right=None)
+    def __init__(self, type, value=Node, left=None, right=None):
        self.type = type
        self.value = value
        self.left = left
        self.right = right
 
 class Parser:
-    def __init__(self. tokens)
+    def __init__(self, tokens):
         self.tokens = tokens
         self.current_token = None
         self.next_token()
 
-    def next_token(self)
+    def next_token(self):
         self.current_token = self.tokens.current()
         if self.tokens:
             self.tokens.discard()
