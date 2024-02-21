@@ -42,6 +42,10 @@ def parse_factor(tokens):
         if tokens and tokens[0]["kind"] != ")":
             raise Exception("Expected ')'")
         return node, tokens[1:]
+    if kind == "-":
+        if tokens[1]["kind"] != "number":
+            raise Exception("Invalid syntax, standalone '-''")
+        return create_node("number", value=-(tokens[1]["value"])), tokens[2:]
     else:
         raise Exception(f"Unexpected token: {tokens[0]}")
 
