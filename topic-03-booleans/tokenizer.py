@@ -21,6 +21,7 @@ patterns = [
     [r"input", "input"],  # function keyword
     [r"exit", "exit"],  # exit keyword
     [r"\+", "+"],
+    [r"--","--"],
     [r"-", "-"],
     [r"\*", "*"],
     [r"/", "/"],
@@ -35,6 +36,9 @@ patterns = [
     [r">=", ">="],
     [r"<", "<"],
     [r">", ">"],
+    [r"\&\&","&&"],
+    [r"\|\|","||"],
+    [r"\!","!"],
     [r"=", "="],
     [r"\.", "."],
     [r"\[", "["],
@@ -86,7 +90,7 @@ def tokenize(characters):
                 token["value"] = int(token["value"])
             continue
         if token["tag"] == "boolean":
-            token["value"] = token["value"] == "true"
+            token["value"] = 1 if token["value"] == "true" else 0
             continue
         if token["tag"] == "null":
             token["value"] = None
@@ -96,7 +100,7 @@ def tokenize(characters):
 
 def test_simple_tokens():
     print("testing simple tokens...")
-    examples = ".,[,],+,-,*,/,(,),{,},;".split(",")
+    examples = ".,[,],+,-,*,/,(,),{,},;,!,&&,||,<,>,<=,>=,==,!=".split(",")
     for example in examples:
         t = tokenize(example)[0]
         assert t["tag"] == example
